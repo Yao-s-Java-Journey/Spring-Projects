@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 数据访问层
  */
-public class DeptDaoImpl {
+public class DeptDaoImpl implements DeptDao {
     public List<String>  getAll() {
         // 1. 加载并读取 dept.txt 文件
         // 通过类加载器可以获取类路径下的所有资源

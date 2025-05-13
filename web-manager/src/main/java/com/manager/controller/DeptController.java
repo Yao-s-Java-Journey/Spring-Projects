@@ -1,6 +1,7 @@
 package com.manager.controller;
 
 import com.manager.entity.Result;
+import com.manager.service.DeptService;
 import com.manager.service.DeptServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class DeptController {
-    private DeptServiceImpl deptService = new DeptServiceImpl();
+    private DeptService deptService = new DeptServiceImpl();
 
     // @RequestMapping(value = "/depts", method = RequestMethod.GET)
     @GetMapping("/depts")

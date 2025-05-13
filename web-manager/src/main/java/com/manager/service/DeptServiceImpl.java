@@ -1,5 +1,6 @@
 package com.manager.service;
 
+import com.manager.dao.DeptDao;
 import com.manager.dao.DeptDaoImpl;
 import com.manager.entity.Dept;
 
@@ -8,8 +9,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DeptServiceImpl {
-    private final DeptDaoImpl deptDao = new DeptDaoImpl();
+public class DeptServiceImpl implements DeptService {
+    private final DeptDao deptDao = new DeptDaoImpl();
 
     public List<Dept> getAll() {
         List<String> stringDeptList = deptDao.getAll();
