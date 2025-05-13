@@ -1,16 +1,22 @@
 package com.manager.service;
 
 import com.manager.dao.DeptDao;
-import com.manager.dao.DeptDaoImpl;
 import com.manager.entity.Dept;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DeptServiceImpl implements DeptService {
-    private final DeptDao deptDao = new DeptDaoImpl();
+// @Component // 程序启动时，自动创建该类对象，并交由 IOC 容器管理
+@Service("service1") // @Component 的衍生注解，标注为一个业务层类
+@Primary // 指定该 Bean 优先级最高（但是优先级低于 @Qualifier）
+public class DeptServiceImpl1 implements DeptService {
+    @Autowired // 自动从 IOC 容器中寻找 Bean 对象，为该变量赋值
+    private DeptDao deptDao;
 
     public List<Dept> getAll() {
         List<String> stringDeptList = deptDao.getAll();
