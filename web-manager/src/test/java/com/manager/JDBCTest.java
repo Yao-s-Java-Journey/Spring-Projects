@@ -1,5 +1,6 @@
 package com.manager;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
@@ -7,10 +8,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * JDBC 测试
- */
+@DisplayName("接入JDBC")
 public class JDBCTest {
+    @DisplayName("快速开始")
     @Test
     public void testUpdate() throws ClassNotFoundException, SQLException {
         // 1. 加载 MySQL 驱动（旧方式，现代 JDBC 通常不需要显式调用）
