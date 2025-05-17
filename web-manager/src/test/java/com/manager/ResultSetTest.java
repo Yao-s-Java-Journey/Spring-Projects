@@ -11,7 +11,7 @@ import java.sql.*;
 public class ResultSetTest {
     @DisplayName("从 ResultSet 获取信息")
     @ParameterizedTest // 参数化测试
-    @CsvSource({"我是一棵落叶树, 123456"})
+    @CsvSource({"我是一棵石榴树, 123456", "我是一棵榴莲树, 123456"})
     public void testResultSet(String account, String pwd) throws SQLException {
         Connection connection = DriverManager.getConnection(
                 "jdbc:mysql:///users",
