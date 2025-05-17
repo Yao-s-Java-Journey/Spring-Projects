@@ -29,7 +29,7 @@ public class ResultSetTest {
             System.out.println("找到该用户，id 为" + id);
             // String accountStr = data.getString("account");
             // int gender = data.getInt("gender");;
-            // String name = data.getString("name");
+            // String username = data.getString("username");
             // String phone = data.getString("phone");
             // int job = data.getInt("job");
             // 返回用户实体类......
