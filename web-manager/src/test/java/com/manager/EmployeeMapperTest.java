@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 @DisplayName("测试 Mybatis")
-@SpringBootTest // 作用：会加载 Spring 环境（IOC 容器）
+@SpringBootTest(classes = WebManagerApplication.class) // 作用：会加载 Spring 环境（IOC 容器）
 public class EmployeeMapperTest {
     @Autowired
     private EmployeeMapper mapper;
