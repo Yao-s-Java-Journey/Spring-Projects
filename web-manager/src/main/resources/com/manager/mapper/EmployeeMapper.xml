@@ -1,0 +1,12 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 1. namespace 的属性要和这个 mapper 接口的全限定名一致 -->
+<mapper namespace="com.manager.mapper.EmployeeMapper">
+    <!-- 2.1 选择需要的语句，比如查询就写 <select>、更新就写 <update> -->
+    <!-- 2.2 id 属性为 EmployeeMapper 接口定义的方法 getAllEmployees() -->
+    <!-- 2.3 resultType 为方法返回值类型（比如返回数字，就写 int，返回 List<User> 就写 List 里面的 User 泛型接口的全限定名） -->
+    <select id="getAllEmployees" resultType="com.manager.entity.Employee">
+        <!-- 3. SQL 语句 -->
+        select account, name, gender, phone, job, salary, image, entry_date from employee
+    </select>
+</mapper>
