@@ -2,10 +2,7 @@ package com.manager.mapper;
 
 import com.manager.entity.Dept;
 import com.manager.entity.Employee;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -17,5 +14,12 @@ public interface DeptMapper {
     //         @Result(column = "create_time", property = "createTime")
     //         @Result(column = "update_time", property = "updateTime")
     // })
-    public List<Dept> getAllDepts();
+    List<Dept> getAllDepts();
+
+    /**
+     * 根据部门 id 删除部门
+     * @param id
+     */
+    @Delete("delete from department where id = #{id}")
+    void deleteById(int id);
 }

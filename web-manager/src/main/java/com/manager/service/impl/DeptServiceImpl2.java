@@ -17,6 +17,7 @@ public class DeptServiceImpl2 implements DeptService {
     @Autowired // 自动从 IOC 容器中寻找 Bean 对象，为该变量赋值
     private DeptDao deptDao;
 
+    @Override
     public List<Dept> getAll() {
         List<String> stringDeptList = deptDao.getAll();
 
@@ -26,9 +27,13 @@ public class DeptServiceImpl2 implements DeptService {
             int id = Integer.parseInt(split[0]);
             String name = split[1];
             LocalDateTime createTime = LocalDateTime.parse(split[2], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-            return new Dept(id, name, createTime ,LocalDateTime.now());
+            return new Dept(id, name, createTime, LocalDateTime.now());
         }).collect(Collectors.toList());
 
         return depts;
+    }
+
+    @Override
+    public void deleteById(int id) {
     }
 }

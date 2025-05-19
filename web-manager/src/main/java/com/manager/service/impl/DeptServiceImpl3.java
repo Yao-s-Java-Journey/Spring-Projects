@@ -16,9 +16,15 @@ public class DeptServiceImpl3 implements DeptService {
     @Autowired
     private DeptMapper deptMapper;
 
+    @Override
     public List<Dept> getAll() {
         List<Dept> res = deptMapper.getAllDepts();
         System.out.println("service res = " + res);
         return res;
+    }
+
+    @Override
+    public void deleteById(int id) {
+        deptMapper.deleteById(id);
     }
 }

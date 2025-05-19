@@ -6,7 +6,9 @@ import com.manager.service.DeptService;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -27,7 +29,12 @@ public class DeptController {
     public Result getAll() {
         // 3. 返回 JSON 响应
         List<Dept> data = deptService.getAll();
-        System.out.println("data = " + data);
         return Result.success(data);
+    }
+
+    @DeleteMapping("/depts")
+    public Result deleteById(@RequestParam("deptId") int id) {
+        deptService.deleteById(id);
+        return Result.success();
     }
 }
