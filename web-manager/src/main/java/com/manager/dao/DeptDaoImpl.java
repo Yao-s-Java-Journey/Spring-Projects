@@ -9,7 +9,7 @@ import java.io.InputStream;
 import java.util.List;
 
 /**
- * 数据访问层
+ * 数据访问层（使用较少，被 Mybatis mapper 取代）
  */
 // @Component // 程序启动时，自动创建该类对象，并交由 IOC 容器管理
 @Repository // @Component 的衍生注解，标注为一个数据访问层类

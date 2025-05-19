@@ -1,0 +1,15 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.manager.mapper.DeptMapper">
+    <select id="getAllDepts" resultType="com.manager.entity.Dept">
+        <!-- 方式二：数据库字段名与实体类属性名映射 -->
+        <!-- select-->
+        <!-- id,-->
+        <!-- name,-->
+        <!-- create_time as createTime,-->
+        <!-- update_time as updateTime-->
+        <!-- from department;-->
+
+        select * from department;
+    </select>
+</mapper>

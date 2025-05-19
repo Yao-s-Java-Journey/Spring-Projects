@@ -1,11 +1,10 @@
 package com.manager.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Data
 @AllArgsConstructor
@@ -13,5 +12,6 @@ import java.time.LocalTime;
 public class Dept {
     private int id;
     private String name;
+    private LocalDateTime createTime;
     private LocalDateTime updateTime;
 }
