@@ -14,6 +14,7 @@ import java.util.List;
  * 请求处理类
  */
 @RestController
+@RequestMapping("/depts")
 public class DeptController {
     // @Autowired // 自动从 IOC 容器中寻找 Bean 对象，为该变量赋值
     // @Qualifier("service2") // 指定 Bean 对象
@@ -22,33 +23,33 @@ public class DeptController {
     private DeptService deptService;
 
     // @RequestMapping(value = "/depts", method = RequestMethod.GET)
-    @GetMapping("/depts")
+    @GetMapping
     public Result getAll() {
         // 3. 返回 JSON 响应
         List<Dept> data = deptService.getAll();
         return Result.success(data);
     }
 
-    @DeleteMapping("/depts")
+    @DeleteMapping
     public Result deleteById(@RequestParam("deptId") int id) {
         deptService.deleteById(id);
         return Result.success();
     }
 
-    @PostMapping("/depts")
+    @PostMapping
     public Result create(@RequestBody Dept dept) {
         // @RequestBody 会将请求体中的数据自动填充到 dept 对应的属性上（前提是字段名相同）
         deptService.create(dept);
         return Result.success();
     }
 
-    @GetMapping("/depts/{deptId}")
+    @GetMapping("/{deptId}")
     public Result getById(@PathVariable("deptId") int id) {
         Dept data = deptService.getById(id);
         return Result.success(data);
     }
 
-    @PutMapping("/depts/{deptId}")
+    @PutMapping("/{deptId}")
     public Result update(@RequestBody Dept dept, @PathVariable("deptId") int id) {
         System.out.println("dept = " + dept);
         deptService.update(id, dept);
