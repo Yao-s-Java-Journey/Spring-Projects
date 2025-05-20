@@ -6,6 +6,7 @@ import com.manager.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -26,5 +27,20 @@ public class DeptServiceImpl3 implements DeptService {
     @Override
     public void deleteById(int id) {
         deptMapper.deleteById(id);
+    }
+
+    @Override
+    public void create(Dept dept) {
+        // 1. 填充请求体没有的数据（比如 update_time，由后端自己生成）
+        dept.setCreateTime(LocalDateTime.now());
+        dept.setUpdateTime(LocalDateTime.now());
+        // 2. 调用 mapper 创建新部门
+        deptMapper.create(dept);
+    }
+
+    @Override
+    public Dept getById(int id) {
+        Dept dept = deptMapper.getById(id);
+        return dept;
     }
 }

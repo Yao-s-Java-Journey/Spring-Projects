@@ -6,10 +6,7 @@ import com.manager.service.DeptService;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,5 +33,18 @@ public class DeptController {
     public Result deleteById(@RequestParam("deptId") int id) {
         deptService.deleteById(id);
         return Result.success();
+    }
+
+    @PostMapping("/depts")
+    public Result create(@RequestBody Dept dept) {
+        // @RequestBody 会将请求体中的数据自动填充到 dept 对应的属性上（前提是字段名相同）
+        deptService.create(dept);
+        return Result.success();
+    }
+
+    @GetMapping("/depts/{deptId}")
+    public Result getById(@PathVariable("deptId") int id) {
+        Dept data = deptService.getById(id);
+        return Result.success(data);
     }
 }

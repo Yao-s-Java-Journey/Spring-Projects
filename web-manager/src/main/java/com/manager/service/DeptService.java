@@ -16,4 +16,17 @@ public interface DeptService {
      * @param id @Override
      */
     void deleteById(int id);
+
+    /**
+     * 创建部门
+     * @param dept
+     */
+    void create(Dept dept);
+
+    /**
+     * 获取单个部门信息
+     * @param id 部门 id
+     * @return
+     */
+    Dept getById(int id);
 }
