@@ -37,4 +37,13 @@ public class DeptServiceImpl1 implements DeptService {
     @Override
     public void deleteById(int id) {
     }
+
+    @Override
+    public void create(Dept dept) {
+    }
+
+    @Override
+    public Dept getById(int id) {
+        return new Dept();
+    }
 }

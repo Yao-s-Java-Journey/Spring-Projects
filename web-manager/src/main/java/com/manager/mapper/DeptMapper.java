@@ -22,4 +22,19 @@ public interface DeptMapper {
      */
     @Delete("delete from department where id = #{id}")
     void deleteById(int id);
+
+    /**
+     * 创建单个部门
+     * @param dept
+     */
+    @Insert("insert into department(name, create_time, update_time) values (#{name}, #{createTime}, #{updateTime})")
+    void create(Dept dept);
+
+    /**
+     * 根据 id 查询部门信息
+     * @param id
+     * @return
+     */
+    @Select("select * from department where id = #{id}")
+    Dept getById(int id);
 }
