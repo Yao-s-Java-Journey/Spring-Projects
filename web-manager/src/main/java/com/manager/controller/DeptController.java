@@ -47,4 +47,11 @@ public class DeptController {
         Dept data = deptService.getById(id);
         return Result.success(data);
     }
+
+    @PutMapping("/depts/{deptId}")
+    public Result update(@RequestBody Dept dept, @PathVariable("deptId") int id) {
+        System.out.println("dept = " + dept);
+        deptService.update(id, dept);
+        return Result.success();
+    }
 }

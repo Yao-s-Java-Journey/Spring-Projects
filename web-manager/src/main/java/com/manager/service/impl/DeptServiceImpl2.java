@@ -45,4 +45,8 @@ public class DeptServiceImpl2 implements DeptService {
     public Dept getById(int id) {
         return new Dept();
     }
+
+    @Override
+    public void update(int id, Dept dept) {
+    }
 }
