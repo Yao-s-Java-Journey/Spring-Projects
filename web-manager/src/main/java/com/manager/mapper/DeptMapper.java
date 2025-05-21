@@ -42,6 +42,6 @@ public interface DeptMapper {
      * 更新部门信息
      * @param dept
      */
-    @Update("update department set name = #{name}, update_time = #{updateTime} where id = #{id}")
+    // @Update("update department set name = #{name}, update_time = #{updateTime} where id = #{id}")
     void update(Dept dept);
 }

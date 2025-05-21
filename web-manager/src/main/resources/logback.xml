@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+    <!-- 定义日志输出格式 -->
+    <!-- 格式化输出: -->
+    <!-- %d：            表示日期 -->
+    <!-- %thread：       表示线程名-->
+    <!-- %-5level：      级别从左显示5个字符宽度-->
+    <!-- %logger{50}：   最长 50 个字符（超出切割）-->
+    <!-- %msg：          日志消息-->
+    <!-- %n：            是换行符-->
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}:%line - %msg%n"/>
+    <property name="LOG_FILE_NAME" value="app"/>
+    <property name="LOG_DIR" value="D:/logs"/>
+
+    <!-- ConsoleAppender (控制台输出，开发环境调试) -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- SizeAndTimeBasedRollingPolicy (按大小和时间滚动)-->
+    <appender name="SIZE_AND_TIME" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 日志输出路径 -->
+        <file>${LOG_DIR}/${LOG_FILE_NAME}.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--通过指定压缩文件名称，来确定分割文件方式-->
+            <fileNamePattern>${LOG_DIR}/${LOG_FILE_NAME}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 按天滚动，保留30天 -->
+            <maxHistory>30</maxHistory>
+            <!-- 单个日志文件最大大小（100MB） -->
+            <maxFileSize>100MB</maxFileSize>
+            <!-- 所有日志总大小限制（10GB） -->
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 控制日志的输出情况:如，开启日志，取消日志，日志级别 -->
+    <root level="ALL">
+        <appender-ref ref="STDOUT"/> <!-- 控制台输出（开发环境保留） -->
+        <appender-ref ref="SIZE_AND_TIME"/>
+        <!-- <appender-ref ref="ASYNC"/> --> <!-- 异步文件输出（生产环境核心） -->
+    </root>
+</configuration>
