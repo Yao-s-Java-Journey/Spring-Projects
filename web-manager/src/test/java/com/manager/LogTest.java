@@ -11,17 +11,15 @@ import org.slf4j.LoggerFactory;
 public class LogTest {
     public static final Logger logger = LoggerFactory.getLogger(LogTest.class);
 
-    // @ParameterizedTest
-    // @CsvSource({
-    //         "1, 2",
-    //         "1, 0"
-    // })
-    // public void testLogger(int a, int b) {
-    @Test
-    public void testLogger() {
+    @ParameterizedTest
+    @CsvSource({
+            "1, 2",
+            "1, 0"
+    })
+    public void testLogger(int a, int b) {
         try {
             logger.info("开始记录");
-            division(1, 2);
+            division(a, b);
             logger.info("执行结束");
         } catch (Exception e) {
             logger.error("错误日志：" + e.getMessage());
@@ -31,7 +29,6 @@ public class LogTest {
     public static void division(int a, int b) {
         logger.debug("调试日志：" + a + "/" + b);
         double c = a / b;
-        System.out.println("c = " + c);
         logger.info("计算结果： " + c);
     }
 }

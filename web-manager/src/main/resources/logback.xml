@@ -23,8 +23,7 @@
     <appender name="SIZE_AND_TIME" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 日志输出路径 -->
         <file>${LOG_DIR}/${LOG_FILE_NAME}.log</file>
-
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!--通过指定压缩文件名称，来确定分割文件方式-->
             <fileNamePattern>${LOG_DIR}/${LOG_FILE_NAME}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <!-- 按天滚动，保留30天 -->
@@ -35,7 +34,7 @@
             <totalSizeCap>10GB</totalSizeCap>
         </rollingPolicy>
 
-        <encoder>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <charset>UTF-8</charset>
             <pattern>${LOG_PATTERN}</pattern>
         </encoder>
