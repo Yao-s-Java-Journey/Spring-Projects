@@ -1,6 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.manager.mapper.DeptMapper">
+    <!-- 查询所有部门 -->
     <select id="getAllDepts" resultType="com.manager.entity.Dept">
         <!-- 方式二：数据库字段名与实体类属性名映射 -->
         <!-- select-->
@@ -12,4 +13,14 @@
 
         select * from department;
     </select>
+
+    <!-- 更新部门 -->
+    <update id="update">
+        update department
+        <set>
+            <if test="name != null or name != ''">name = #{name},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>
