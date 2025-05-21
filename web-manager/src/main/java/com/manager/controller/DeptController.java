@@ -4,6 +4,7 @@ import com.manager.entity.Dept;
 import com.manager.entity.Result;
 import com.manager.service.DeptService;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * 请求处理类
  */
+@Slf4j
 @RestController
 @RequestMapping("/depts")
 public class DeptController {
@@ -51,7 +53,7 @@ public class DeptController {
 
     @PutMapping("/{deptId}")
     public Result update(@RequestBody Dept dept, @PathVariable("deptId") int id) {
-        System.out.println("dept = " + dept);
+        log.info("dept = {}", dept);
         deptService.update(id, dept);
         return Result.success();
     }

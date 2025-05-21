@@ -3,6 +3,7 @@ package com.manager.service.impl;
 import com.manager.entity.Dept;
 import com.manager.mapper.DeptMapper;
 import com.manager.service.DeptService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * 使用 mapper 接口的 service
  */
+@Slf4j
 @Service("deptService")
 public class DeptServiceImpl3 implements DeptService {
     @Autowired
@@ -20,7 +22,7 @@ public class DeptServiceImpl3 implements DeptService {
     @Override
     public List<Dept> getAll() {
         List<Dept> res = deptMapper.getAllDepts();
-        System.out.println("service res = " + res);
+        log.info("service res = {}", res);
         return res;
     }
 

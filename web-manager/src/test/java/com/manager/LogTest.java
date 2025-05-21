@@ -1,5 +1,6 @@
 package com.manager;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -8,8 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @DisplayName("Logback 日志测试")
+@Slf4j
 public class LogTest {
-    public static final Logger logger = LoggerFactory.getLogger(LogTest.class);
+    // public static final Logger logger = LoggerFactory.getLogger(LogTest.class);
 
     @ParameterizedTest
     @CsvSource({
@@ -18,11 +20,11 @@ public class LogTest {
     })
     public void testLogger(int a, int b) {
         try {
-            logger.info("开始记录");
+            log.info("开始记录");
             division(a, b);
-            logger.info("执行结束");
+            log.info("执行结束");
         } catch (Exception e) {
-            logger.error("错误日志：" + e.getMessage());
+            log.error("错误日志：" + e.getMessage());
         }
     }
 
