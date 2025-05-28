@@ -13,7 +13,7 @@ public class PreparedStatementTest {
     @CsvSource({"我是一棵石榴树, 123456", "asd&asd, ' or '1' = 1'"})
     public void testPreparedStatement(String account, String pwd) throws SQLException  {
         Connection connection = DriverManager.getConnection(
-                "jdbc:mysql:///users",
+                "jdbc:mysql:///manager",
                 "root",
                 "1234"
         );

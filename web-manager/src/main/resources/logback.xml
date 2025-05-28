@@ -41,7 +41,7 @@
     </appender>
 
     <!-- 控制日志的输出情况:如，开启日志，取消日志，日志级别 -->
-    <root level="ALL">
+    <root level="INFO">
         <appender-ref ref="STDOUT"/> <!-- 控制台输出（开发环境保留） -->
         <appender-ref ref="SIZE_AND_TIME"/>
         <!-- <appender-ref ref="ASYNC"/> --> <!-- 异步文件输出（生产环境核心） -->

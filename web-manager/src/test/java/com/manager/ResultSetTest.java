@@ -14,7 +14,7 @@ public class ResultSetTest {
     @CsvSource({"我是一棵石榴树, 123456", "我是一棵榴莲树, 123456"})
     public void testResultSet(String account, String pwd) throws SQLException {
         Connection connection = DriverManager.getConnection(
-                "jdbc:mysql:///users",
+                "jdbc:mysql:///manager",
                 "root",
                 "1234"
         );

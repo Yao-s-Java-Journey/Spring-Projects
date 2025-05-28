@@ -7,6 +7,6 @@
     <!-- 2.3 resultType 为方法返回值类型（比如返回数字，就写 int，返回 List<User> 就写 List 里面的 User 泛型接口的全限定名） -->
     <select id="getAllEmployees" resultType="com.manager.entity.Employee">
         <!-- 3. SQL 语句 -->
-        select account, gender, phone, job, salary, image, entry_date from employee
+        select * from employee
     </select>
 </mapper>

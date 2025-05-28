@@ -29,8 +29,8 @@ public class LogTest {
     }
 
     public static void division(int a, int b) {
-        logger.debug("调试日志：" + a + "/" + b);
+        log.debug("调试日志：" + a + "/" + b);
         double c = a / b;
-        logger.info("计算结果： " + c);
+        log.info("计算结果： " + c);
     }
 }

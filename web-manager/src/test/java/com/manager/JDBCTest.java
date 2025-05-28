@@ -18,7 +18,7 @@ public class JDBCTest {
 
         // 2. 获取数据库连接对象 Connection
         Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/users", // 数据库地址
+                "jdbc:mysql://localhost:3306/manager", // 数据库地址
                 "root",
                 "1234"
         );
@@ -28,7 +28,7 @@ public class JDBCTest {
 
         // 4. 执行 SQL 语句
         // 该方法返回 int 值，表示影响的行数，根据返回值验证执行结果。
-        int row = statement.executeUpdate("update employee set qq = 1234567899 where id = 1");
+        int row = statement.executeUpdate("update employee set account = '落叶树' where id = 1");
         System.out.println("row = " + row);
 
         // 5. 释放资源
