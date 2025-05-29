@@ -21,7 +21,11 @@ public class EmployeeController {
     @GetMapping()
     public Result page(Integer page, Integer pageSize) {
         log.info("分页查询：page -> {}, pageSize -> {}", page, pageSize);
-        PageBean pageBean = employeeService.page(page, pageSize);
+        // 使用原始方式分页
+        // PageBean pageBean = employeeService.page(page, pageSize);
+
+        // 使用 PageHelper 插进分页
+        PageBean pageBean = employeeService.list(page, pageSize);
         return Result.success(pageBean);
     }
 }

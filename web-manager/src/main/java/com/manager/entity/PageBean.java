@@ -14,5 +14,5 @@ import java.util.List;
 @NoArgsConstructor
 public class PageBean {
     private Long total;
-    private List data;
+    private List list;
 }
