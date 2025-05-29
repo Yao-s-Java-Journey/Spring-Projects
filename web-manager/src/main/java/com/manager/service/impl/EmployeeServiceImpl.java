@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -81,5 +82,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 3. 封装 PageBean 对象并返回结果
         Page list = (Page) res;
         return new PageBean(list.getTotal(), list.getResult());
+    }
+
+    @Override
+    public void save(Employee employee) {
+        // 1. 保存员工基本信息到 employee 表
+        // 1.1 补充缺失字段
+        employee.setPassword("123456");
+        employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());
+        // 1.2 调用 mapper
+        employeeMapper.insert(employee);
+
+        // 2. 保存员工经历信息到 experience 表
     }
 }
