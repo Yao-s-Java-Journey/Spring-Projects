@@ -9,4 +9,23 @@
         <!-- 3. SQL 语句 -->
         select * from employee
     </select>
+
+    <!-- 完整的动态条件分页查询 -->
+    <select id="queryPage" resultType="com.manager.entity.Employee">
+        select e.*, d.name as deptName from employee as e left outer join department as d on e.dept_id = d.id
+        <!-- <where> 标签可以根据判断条件自动添加 where 关键字，也可以去掉第一个多余的 and 或者 or -->
+        <where>
+            <if test="account != null and account != ''">
+                <!-- #{} 在字符串 '' 中不起作用，需要使用 concat() 进行连接 -->
+                e.account like concat('%', #{account}, '%')
+            </if>
+            <if test="gender != null">
+                and e.gender = #{gender}
+            </if>
+            <if test="entryDateBegin != null and entryDateEnd != null">
+                and e.entry_date between #{entryDateBegin} and #{entryDateEnd}
+            </if>
+        </where>
+        order by e.update_time desc
+    </select>
 </mapper>

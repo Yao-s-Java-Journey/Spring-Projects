@@ -3,6 +3,7 @@ package com.manager.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.manager.entity.Employee;
+import com.manager.entity.EmployeeQueryParam;
 import com.manager.entity.PageBean;
 import com.manager.mapper.EmployeeMapper;
 import com.manager.service.EmployeeService;
@@ -61,5 +62,24 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 还可以有以下写法：
         // return new PageBean(list.getTotal(), list);
         // return new PageBean(list.getTotal(), res);
+    }
+
+    /**
+     * 完整的条件分页查询
+     *
+     * @param params 查询条件
+     * @return 当前页查询数据
+     */
+    @Override
+    public PageBean queryPage(EmployeeQueryParam params) {
+        // 1. 配置分页参数（只会对紧跟其后的第一条 SQL 语句进行分页处理，如果其他 SQL 需要分页，就在对应的 SQL 语句上再写一次）
+        PageHelper.startPage(params.getPage(), params.getPageSize());
+
+        // 2. 调用 mapper 查询
+        List<Employee> res = employeeMapper.queryPage(params);
+
+        // 3. 封装 PageBean 对象并返回结果
+        Page list = (Page) res;
+        return new PageBean(list.getTotal(), list.getResult());
     }
 }
