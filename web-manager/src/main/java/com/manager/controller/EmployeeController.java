@@ -1,5 +1,6 @@
 package com.manager.controller;
 
+import com.manager.entity.EmployeeQueryParam;
 import com.manager.entity.PageBean;
 import com.manager.entity.Result;
 import com.manager.service.EmployeeService;
@@ -9,8 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @Slf4j
 @RestController
 @RequestMapping("/emps")
@@ -19,13 +18,17 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping()
-    public Result page(Integer page, Integer pageSize) {
-        log.info("分页查询：page -> {}, pageSize -> {}", page, pageSize);
+    public Result page(EmployeeQueryParam params) {
+        log.info("分页查询参数：{}", params);
         // 使用原始方式分页
         // PageBean pageBean = employeeService.page(page, pageSize);
 
         // 使用 PageHelper 插进分页
-        PageBean pageBean = employeeService.list(page, pageSize);
+        // PageBean pageBean = employeeService.list(page, pageSize);
+        // return Result.success(pageBean);
+
+        // 完整的条件分页查询
+        PageBean pageBean = employeeService.queryPage(params);
         return Result.success(pageBean);
     }
 }

@@ -1,6 +1,7 @@
 package com.manager.mapper;
 
 import com.manager.entity.Employee;
+import com.manager.entity.EmployeeQueryParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -38,4 +39,11 @@ public interface EmployeeMapper {
      */
     @Select("select e.*, d.name as deptName from employee as e left outer join department as d on e.dept_id = d.id")
     List<Employee> list();
+
+    /**
+     * 基于 XML 开发的完整的动态条件分页查询
+     * @param params 查询条件
+     * @return 查询结果
+     */
+    List<Employee> queryPage(EmployeeQueryParam params);
 }
