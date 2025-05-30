@@ -28,4 +28,10 @@
         </where>
         order by e.update_time desc
     </select>
+
+    <!-- 创建员工信息 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into employee
+        values (null, #{account}, #{password}, #{username}, #{gender}, #{phone}, #{deptId}, #{job}, #{salary}, #{avatar}, #{entryDate}, #{createTime}, #{updateTime})
+    </insert>
 </mapper>

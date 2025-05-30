@@ -46,4 +46,10 @@ public interface EmployeeMapper {
      * @return 查询结果
      */
     List<Employee> queryPage(EmployeeQueryParam params);
+
+    /**
+     * 新增员工
+     * @param emp 员工信息
+     */
+    void insert(Employee emp);
 }

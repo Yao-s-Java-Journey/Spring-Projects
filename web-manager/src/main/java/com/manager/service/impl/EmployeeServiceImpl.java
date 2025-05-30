@@ -3,13 +3,17 @@ package com.manager.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.manager.entity.Employee;
+import com.manager.entity.EmployeeExperience;
 import com.manager.entity.EmployeeQueryParam;
 import com.manager.entity.PageBean;
 import com.manager.mapper.EmployeeMapper;
+import com.manager.mapper.ExperienceMapper;
 import com.manager.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Options;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,6 +23,9 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeMapper employeeMapper;
+
+    @Autowired
+    private ExperienceMapper empMapper;
 
     /**
      * 分页查询
@@ -84,7 +91,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         return new PageBean(list.getTotal(), list.getResult());
     }
 
+    /**
+     * 新增员工
+     * @param employee
+     */
     @Override
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     public void save(Employee employee) {
         // 1. 保存员工基本信息到 employee 表
         // 1.1 补充缺失字段
@@ -95,5 +107,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMapper.insert(employee);
 
         // 2. 保存员工经历信息到 experience 表
+        Integer id = employee.getId(); // 使用 @Options 注解才能拿到
+        List<EmployeeExperience> expList = employee.getExperienceList();
+        if (!CollectionUtils.isEmpty(expList)) {
+            // 2.1 经历关联id
+            expList.forEach(exp -> {
+                exp.setEmployeeId(id);
+            });
+            // 2.2 批量保存员工经历
+            empMapper.insertBatch(expList);
+        }
     }
 }
