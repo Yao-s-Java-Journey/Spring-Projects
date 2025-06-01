@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Options;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
@@ -97,6 +98,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     @Options(useGeneratedKeys = true, keyProperty = "id")
+    @Transactional // 开启事务管理
     public void save(Employee employee) {
         // 1. 保存员工基本信息到 employee 表
         // 1.1 补充缺失字段
