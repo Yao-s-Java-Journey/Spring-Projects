@@ -2,12 +2,10 @@ package com.manager.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.manager.entity.Employee;
-import com.manager.entity.EmployeeExperience;
-import com.manager.entity.EmployeeQueryParam;
-import com.manager.entity.PageBean;
+import com.manager.entity.*;
 import com.manager.mapper.EmployeeMapper;
 import com.manager.mapper.ExperienceMapper;
+import com.manager.service.EmpLogService;
 import com.manager.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Options;
@@ -27,6 +25,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private ExperienceMapper empMapper;
+
+    @Autowired
+    private EmpLogService empLogService;
 
     /**
      * 分页查询
@@ -100,24 +101,32 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     @Transactional // 开启事务管理
     public void save(Employee employee) {
-        // 1. 保存员工基本信息到 employee 表
-        // 1.1 补充缺失字段
-        employee.setPassword("123456");
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
-        // 1.2 调用 mapper
-        employeeMapper.insert(employee);
+        try {
+            // 1. 保存员工基本信息到 employee 表
+            // 1.1 补充缺失字段
+            employee.setPassword("123456");
+            employee.setCreateTime(LocalDateTime.now());
+            employee.setUpdateTime(LocalDateTime.now());
+            // 1.2 调用 mapper
+            employeeMapper.insert(employee);
 
-        // 2. 保存员工经历信息到 experience 表
-        Integer id = employee.getId(); // 使用 @Options 注解才能拿到
-        List<EmployeeExperience> expList = employee.getExperienceList();
-        if (!CollectionUtils.isEmpty(expList)) {
-            // 2.1 经历关联id
-            expList.forEach(exp -> {
-                exp.setEmployeeId(id);
-            });
-            // 2.2 批量保存员工经历
-            empMapper.insertBatch(expList);
+            // 2. 保存员工经历信息到 experience 表
+            Integer id = employee.getId(); // 使用 @Options 注解才能拿到
+            List<EmployeeExperience> expList = employee.getExperienceList();
+            if (!CollectionUtils.isEmpty(expList)) {
+                // 2.1 经历关联id
+                expList.forEach(exp -> {
+                    exp.setEmployeeId(id);
+                });
+                // 2.2 批量保存员工经历
+                empMapper.insertBatch(expList);
+            }
+        } finally {
+            // 事务管理：无论新增员工是否成功，都需要添加操作日志
+            EmployeeLog empLog = new EmployeeLog();
+            empLog.setOperateTime(LocalDateTime.now());
+            empLog.setInfo("插入员工：" + employee.getUsername());
+            empLogService.insertLog(empLog);
         }
     }
 }
