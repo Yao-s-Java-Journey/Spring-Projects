@@ -3,12 +3,14 @@ package com.manager.service.impl;
 import com.manager.entity.EmployeeLog;
 import com.manager.mapper.EmpLogMapper;
 import com.manager.service.EmpLogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class EmpLogServiceImpl implements EmpLogService {
+    @Autowired
     private EmpLogMapper empLogMapper;
 
     /**
