@@ -28,24 +28,23 @@ public class AliYunOSS {
             String bucketName,
             String region
     ) throws com.aliyuncs.exceptions.ClientException {
-        // Endpoint以华东1（杭州）为例，填写为https://oss-cn-hangzhou.aliyuncs.com，其它Region请按实际情况填写。
+        // 配置：Endpoint以华东1（杭州）为例，填写为https://oss-cn-hangzhou.aliyuncs.com，其它Region请按实际情况填写。
         // String endpoint = "https://oss-cn-shanghai.aliyuncs.com";
         // String bucketName = generateUniqueBucketName("yao-java-dev");
 
-        // 填写Bucket所在地域。以华东1（杭州）为例，Region填写为cn-hangzhou。
+        // 配置：填写Bucket所在地域。以华东1（杭州）为例，Region填写为cn-hangzhou。
         // 关于OSS支持的Region与Endpoint的对应关系，请参见https://www.alibabacloud.com/help/zh/oss/user-guide/regions-and-endpoints。
         // String region = "cn-shanghai";
 
-        // 从环境变量中获取访问凭证。运行本代码示例之前，请先配置环境变量
+        // 配置：从环境变量中获取访问凭证。运行本代码示例之前，请先配置环境变量
         EnvironmentVariableCredentialsProvider credentialsProvider =
                 CredentialsProviderFactory.newEnvironmentVariableCredentialsProvider();
 
-        // 创建OSSClient实例。
-        // 当OSSClient实例不再使用时，调用shutdown方法以释放资源。
+        // 配置：显式声明使用 V4 签名算法
         ClientBuilderConfiguration clientBuilderConfiguration = new ClientBuilderConfiguration();
-
-        // 显式声明使用 V4 签名算法
         clientBuilderConfiguration.setSignatureVersion(SignVersion.V4);
+
+        // 创建 OSS 实例
         OSS ossClient = OSSClientBuilder.create()
                 .endpoint(endpoint)
                 .credentialsProvider(credentialsProvider)
@@ -58,11 +57,9 @@ public class AliYunOSS {
         try {
             // 1. 创建存储空间（Bucket）
             ossClient.createBucket(bucketName);
-            log.debug("1. Bucket " + bucketName + " 创建成功。");
 
             // 2. 上传文件
             ossClient.putObject(bucketName, objectName, new ByteArrayInputStream(content));
-            log.info("文件 " + extName + " 上传成功。");
         } catch (OSSException oe) {
             log.error("Caught an OSSException, which means your request made it to OSS, "
                     + "but was rejected with an error response for some reason.");
@@ -81,6 +78,7 @@ public class AliYunOSS {
             }
         }
 
+        // 返回阿里云的文件链接
         return endpoint.split("//")[0] + bucketName + "." + endpoint.split("//")[1] + "/" + objectName;
     }
 }
