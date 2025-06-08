@@ -1,0 +1,37 @@
+# 端口配置
+server:
+  port: 8888
+
+# Spring 配置
+spring:
+  application:
+    name: web-manager
+
+    # 数据库连接信息
+  datasource:
+    url: jdbc:mysql:///manager
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
+    type: com.alibaba.druid.pool.DruidDataSource # 切换 Druid 连接池
+
+    # 文件限制
+  servlet:
+    multipart:
+      max-file-size: 10MB # 单个文件最大可上传大小（默认 1 MB）
+      max-request-size: 100MB # 单次请求所有文件最大可上传大小（默认 10 MB）
+
+# Mybatis 配置
+mybatis:
+  configuration:
+    # 配置 SQL 日志，打印在控制台
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 开启驼峰命名规则映射
+    map-underscore-to-camel-case: true
+
+# 阿里云 OSS 自定义配置
+aliyun:
+  oss:
+    endpoint: https://oss-cn-shanghai.aliyuncs.com
+    bucket: yao-java-dev
+    region: region
