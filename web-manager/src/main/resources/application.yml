@@ -33,5 +33,5 @@ mybatis:
 aliyun:
   oss:
     endpoint: https://oss-cn-shanghai.aliyuncs.com
-    bucket: yao-java-dev
+    bucket: yao-java-demo
     region: region
