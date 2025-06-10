@@ -11,4 +11,10 @@ public interface ExperienceMapper {
      * 批量新增员工经历
      */
     void insertBatch(List<EmployeeExperience> expList);
+
+    /**
+     * 批量删除员工经历
+     * @param empIds
+     */
+    void deleteBatch(List<Integer> empIds);
 }

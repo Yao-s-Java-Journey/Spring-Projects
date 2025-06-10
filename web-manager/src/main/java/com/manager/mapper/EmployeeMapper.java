@@ -52,4 +52,10 @@ public interface EmployeeMapper {
      * @param emp 员工信息
      */
     void insert(Employee emp);
+
+    /**
+     * 批量删除员工
+     * @param ids
+     */
+    void deleteBatch(List<Integer> ids);
 }
