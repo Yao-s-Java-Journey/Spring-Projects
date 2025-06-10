@@ -151,11 +151,14 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public Employee getById(Integer id) {
-        // 方式一：分步查询（推荐）
+        // 方式一：分步查询（简单，推荐）
         // 1. 先查询员工基本信息
-        Employee emp =  employeeMapper.getBasicById(id);
+        // Employee emp =  employeeMapper.getBasicById(id);
         // 2. 再查询员工经历信息
-        emp.setExperienceList(expMapper.getByEmpId(id));
+        // emp.setExperienceList(expMapper.getByEmpId(id));
+
+        // 方式二：多表外连查询
+        Employee emp =  employeeMapper.getById(id);
 
         return emp;
     }

@@ -65,4 +65,11 @@ public interface EmployeeMapper {
      */
     @Select("select * from employee where id = #{id}")
     Employee getBasicById(Integer id);
+
+    /**
+     * 根据员工 id 查询员工所有信息（包括连表查询就职经历）
+     * @param id
+     * @return
+     */
+    Employee getById(Integer id);
 }

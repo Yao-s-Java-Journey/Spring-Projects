@@ -43,4 +43,46 @@
             ${id}
         </foreach>
     </delete>
+
+    <!-- 根据员工 id 连表查询员工详情（包括经历） -->
+    <!--suppress LanguageDetectionInspection -->
+    <select id="getById" resultMap="employeeMap">
+        select  emp.*,
+                exp.id as exp_id,
+                exp.employee_id as exp_employee_id,
+                exp.company as exp_company,
+                exp.job as exp_job,
+                exp.begin as exp_begin,
+                exp.end as exp_end
+        from employee as emp
+                left outer join experience as exp
+                        on emp.id = exp.employee_id
+        where emp.id = #{id}
+    </select>
+
+    <!-- <resultMap> 定义如何将查询结果映射到 Java 对象，适合处理一对多或多对多关系的数据映射 -->
+    <!-- id 对应 <select> 中 resultMap 的值 -->
+    <!-- type 对应当前映射的 Java 对象的类型 -->
+    <!-- autoMapping 自动将数据库的值映射到 Java 对象属性上（前提是字段名一样，含下划线和驼峰转换，默认 false） -->
+    <resultMap id="employeeMap" type="com.manager.entity.Employee" autoMapping="true">
+        <!-- 主键映射 -->
+        <!-- column：当前查询结果的哪一列 -->
+        <!-- property：Java 对象的属性 -->
+        <id column="id" property="id"/>
+
+        <!-- collection：用于处理一对多关系，即一个 Java 对象包含多个子对象（如 Employee 包含多个 experience）-->
+        <!-- property： Java 子对象的属性名 -->
+        <!-- ofType：子对象的类型 -->
+        <collection property="experienceList" ofType="com.manager.entity.EmployeeExperience">
+            <!-- <result> 映射普通字段 -->
+            <!-- column： <select> 中查询的字段 -->
+            <!-- property： 子对象中元素的属性名 -->
+            <result column="exp_id" property="id" />
+            <result column="exp_employee_id" property="employeeId" />
+            <result column="exp_job" property="job" />
+            <result column="exp_company" property="company" />
+            <result column="exp_begin" property="begin" />
+            <result column="exp_end" property="end" />
+        </collection>
+    </resultMap>
 </mapper>
