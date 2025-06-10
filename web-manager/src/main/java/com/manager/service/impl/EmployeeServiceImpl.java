@@ -24,7 +24,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeMapper employeeMapper;
 
     @Autowired
-    private ExperienceMapper empMapper;
+    private ExperienceMapper expMapper;
 
     @Autowired
     private EmpLogService empLogService;
@@ -119,7 +119,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                     exp.setEmployeeId(id);
                 });
                 // 2.2 批量保存员工经历
-                empMapper.insertBatch(expList);
+                expMapper.insertBatch(expList);
             }
         } finally {
             // 事务管理：无论新增员工是否成功，都需要添加操作日志
@@ -128,5 +128,38 @@ public class EmployeeServiceImpl implements EmployeeService {
             empLog.setInfo("插入员工：" + employee.getUsername());
             empLogService.insertLog(empLog);
         }
+    }
+
+    /**
+     * 批量删除员工
+     */
+    @Override
+    @Transactional
+    public void delete(List<Integer> ids) {
+        log.info("===== ids: {}", ids);
+        // 1. 删除员工基本信息
+        employeeMapper.deleteBatch(ids);
+
+        // 2. 删除员工
+        expMapper.deleteBatch(ids);
+    }
+
+    /**
+     * 根据 id 查询员工
+     * @param id
+     * @return
+     */
+    @Override
+    public Employee getById(Integer id) {
+        // 方式一：分步查询（简单，推荐）
+        // 1. 先查询员工基本信息
+        // Employee emp =  employeeMapper.getBasicById(id);
+        // 2. 再查询员工经历信息
+        // emp.setExperienceList(expMapper.getByEmpId(id));
+
+        // 方式二：多表外连查询
+        Employee emp =  employeeMapper.getById(id);
+
+        return emp;
     }
 }

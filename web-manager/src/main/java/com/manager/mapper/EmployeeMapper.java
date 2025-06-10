@@ -52,4 +52,24 @@ public interface EmployeeMapper {
      * @param emp 员工信息
      */
     void insert(Employee emp);
+
+    /**
+     * 批量删除员工
+     * @param ids
+     */
+    void deleteBatch(List<Integer> ids);
+
+    /**
+     * 根据员工 id 查询员工基本信息
+     * @param id
+     */
+    @Select("select * from employee where id = #{id}")
+    Employee getBasicById(Integer id);
+
+    /**
+     * 根据员工 id 查询员工所有信息（包括连表查询就职经历）
+     * @param id
+     * @return
+     */
+    Employee getById(Integer id);
 }
