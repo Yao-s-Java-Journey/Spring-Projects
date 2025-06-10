@@ -143,4 +143,20 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 2. 删除员工
         expMapper.deleteBatch(ids);
     }
+
+    /**
+     * 根据 id 查询员工
+     * @param id
+     * @return
+     */
+    @Override
+    public Employee getById(Integer id) {
+        // 方式一：分步查询（推荐）
+        // 1. 先查询员工基本信息
+        Employee emp =  employeeMapper.getBasicById(id);
+        // 2. 再查询员工经历信息
+        emp.setExperienceList(expMapper.getByEmpId(id));
+
+        return emp;
+    }
 }

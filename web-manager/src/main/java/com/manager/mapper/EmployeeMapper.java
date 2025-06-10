@@ -58,4 +58,11 @@ public interface EmployeeMapper {
      * @param ids
      */
     void deleteBatch(List<Integer> ids);
+
+    /**
+     * 根据员工 id 查询员工基本信息
+     * @param id
+     */
+    @Select("select * from employee where id = #{id}")
+    Employee getBasicById(Integer id);
 }

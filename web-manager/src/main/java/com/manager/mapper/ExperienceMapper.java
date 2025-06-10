@@ -2,6 +2,7 @@ package com.manager.mapper;
 
 import com.manager.entity.EmployeeExperience;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -17,4 +18,11 @@ public interface ExperienceMapper {
      * @param empIds
      */
     void deleteBatch(List<Integer> empIds);
+
+    /**
+     * 根据员工id查询员工经历
+     * @param empId
+     */
+    @Select("select * from experience where employee_id = #{empId}")
+    List<EmployeeExperience> getByEmpId(Integer empId);
 }

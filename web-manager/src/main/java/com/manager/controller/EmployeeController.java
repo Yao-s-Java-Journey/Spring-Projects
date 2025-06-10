@@ -63,4 +63,13 @@ public class EmployeeController {
         employeeService.delete(ids);
         return Result.success();
     }
+
+    /**
+     * 根据 id 查询员工
+     */
+    @GetMapping("/{id}")
+    public Result getById(@PathVariable Integer id) {
+        Employee emp = employeeService.getById(id);
+        return Result.success(emp);
+    }
 }

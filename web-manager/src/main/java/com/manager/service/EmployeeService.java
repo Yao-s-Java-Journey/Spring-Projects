@@ -12,4 +12,5 @@ public interface EmployeeService {
     PageBean queryPage(EmployeeQueryParam params);
     void save(Employee employee);
     void delete(List<Integer> ids);
+    Employee getById(Integer id);
 }
