@@ -162,4 +162,28 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return emp;
     }
+
+    /**
+     * 修改员工信息
+     * @param employee
+     */
+    @Override
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    public void update(Employee employee) {
+        // 1. 修改员工基本信息
+        employee.setUpdateTime(LocalDateTime.now());
+        employeeMapper.update(employee);
+
+        // 2. 修改员工经历信息（直接覆盖，即先删后增）
+        Integer empId = employee.getId();
+        expMapper.deleteByEmpId(empId);
+        // 2.2 新的经历需要关联 employee_id
+        List<EmployeeExperience> expList = employee.getExperienceList();
+        if (!CollectionUtils.isEmpty(expList)) {
+            expList.forEach(exp -> {
+                exp.setEmployeeId(empId);
+            });
+            expMapper.insertBatch(expList);
+        }
+    }
 }

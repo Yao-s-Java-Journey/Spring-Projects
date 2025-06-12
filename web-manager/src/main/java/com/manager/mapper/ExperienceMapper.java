@@ -25,4 +25,16 @@ public interface ExperienceMapper {
      */
     @Select("select * from experience where employee_id = #{empId}")
     List<EmployeeExperience> getByEmpId(Integer empId);
+
+    /**
+     * 批量更新员工经历
+     * @param experienceList
+     */
+    void update(List<EmployeeExperience> experienceList);
+
+    /**
+     * 根据员工 id 删除员工经历
+     * @param empId
+     */
+    void deleteByEmpId(Integer empId);
 }
