@@ -72,4 +72,13 @@ public class EmployeeController {
         Employee emp = employeeService.getById(id);
         return Result.success(emp);
     }
+
+    /**
+     * 修改员工信息
+     */
+    @PutMapping()
+    public Result update(@RequestBody Employee employee) {
+        employeeService.update(employee);
+        return Result.success();
+    }
 }
