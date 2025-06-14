@@ -7,6 +7,7 @@ import com.manager.mapper.EmployeeMapper;
 import com.manager.mapper.ExperienceMapper;
 import com.manager.service.EmpLogService;
 import com.manager.service.EmployeeService;
+import com.manager.utils.JWT;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Options;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -185,5 +188,24 @@ public class EmployeeServiceImpl implements EmployeeService {
             });
             expMapper.insertBatch(expList);
         }
+    }
+
+    @Override
+    public LoginInfo getByAcctAndPwd(String account, String password) {
+        Employee emp = employeeMapper.getByAcctAndPwd(account, password);
+
+        // 查询到员工，为其创建 token
+        if (emp != null) {
+            // 生成 jwt 负载
+            Integer id = emp.getId();
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("id", id);
+            claims.put("username", emp.getUsername());
+            // 创建 token
+            String accessToken = JWT.createToken(claims);
+            // 返回登录信息
+            return new LoginInfo(id, emp.getAccount(), emp.getUsername(), accessToken);
+        }
+        return null;
     }
 }

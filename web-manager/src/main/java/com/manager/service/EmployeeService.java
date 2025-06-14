@@ -2,6 +2,7 @@ package com.manager.service;
 
 import com.manager.entity.Employee;
 import com.manager.entity.EmployeeQueryParam;
+import com.manager.entity.LoginInfo;
 import com.manager.entity.PageBean;
 
 import java.util.List;
@@ -14,4 +15,5 @@ public interface EmployeeService {
     void delete(List<Integer> ids);
     Employee getById(Integer id);
     void update(Employee employee);
+    LoginInfo getByAcctAndPwd(String account, String password);
 }

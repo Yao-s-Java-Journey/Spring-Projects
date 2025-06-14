@@ -78,4 +78,12 @@ public interface EmployeeMapper {
      * @param employee
      */
     void update(Employee employee);
+
+    /**
+     * 根据员工账号和密码查询员工信息
+     * @param acct  员工账号
+     * @param pwd  员工密码
+     */
+    @Select("select * from employee where account = #{acct} and password = #{pwd}")
+    Employee getByAcctAndPwd(String acct, String pwd);
 }
