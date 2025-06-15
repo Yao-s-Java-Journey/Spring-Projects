@@ -12,8 +12,8 @@ import java.util.Map;
  * JWT 令牌工具类
  */
 public class JWT {
-    // 定义字符串密钥
-    private static final String SING_KEY = "Yao";
+    // 定义字符串密钥，确保密钥长度足够（至少 256 位），否则会初始化失败
+    private static final String SING_KEY = "ThisIsASecureSecretKeyForJWTSigning123!";
 
     // 方式一：专门用于 HMAC-SHA 系列算法的 Keys.hmacShaKeyFor
     // 将字符串密钥转换为合适的 Key 对象，生成 HMAC-SHA256 密钥
@@ -29,6 +29,7 @@ public class JWT {
 
     /**
      * 生成令牌
+     *
      * @param claims 负载信息
      * @return 令牌
      */
@@ -43,10 +44,11 @@ public class JWT {
 
     /**
      * 解析令牌
+     *
      * @param token 令牌
      * @return 负载信息
      */
-    public static Claims  parseToken(String token) {
+    public static Claims parseToken(String token) {
         return Jwts.parser()
                 .verifyWith(SECRET_KEY) // 设置签名密钥
                 .build()

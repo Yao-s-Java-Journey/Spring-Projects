@@ -98,6 +98,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 新增员工
+     *
      * @param employee
      */
     @Override
@@ -149,6 +150,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 根据 id 查询员工
+     *
      * @param id
      * @return
      */
@@ -161,13 +163,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         // emp.setExperienceList(expMapper.getByEmpId(id));
 
         // 方式二：多表外连查询
-        Employee emp =  employeeMapper.getById(id);
+        Employee emp = employeeMapper.getById(id);
 
         return emp;
     }
 
     /**
      * 修改员工信息
+     *
      * @param employee
      */
     @Override
@@ -190,6 +193,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
+    /**
+     * 根据账号和密码查询员工
+     *
+     * @param account  账号
+     * @param password 密码
+     * @return 员工信息
+     */
     @Override
     public LoginInfo getByAcctAndPwd(String account, String password) {
         Employee emp = employeeMapper.getByAcctAndPwd(account, password);
