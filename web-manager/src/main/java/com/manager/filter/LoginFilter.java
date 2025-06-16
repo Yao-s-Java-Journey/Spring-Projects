@@ -17,7 +17,7 @@ import java.io.IOException;
  * 登录过滤器
  */
 @Slf4j
-@WebFilter("/*") // urlPatterns 和 values 作用一样，可以只写一个
+// @WebFilter("/*") // urlPatterns 和 values 作用一样，可以只写一个
 public class LoginFilter implements Filter{
     @Override
     public void doFilter(

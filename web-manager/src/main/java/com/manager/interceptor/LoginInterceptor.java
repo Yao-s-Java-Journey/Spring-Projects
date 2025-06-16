@@ -35,10 +35,10 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (token == null || token.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return false;
-        };
+        }
 
         // 令牌解析
-        try  {
+        try {
             Claims claims = JWT.parseToken(token);
             log.info("=== claims === {}", claims);
         } catch (Exception e) {
