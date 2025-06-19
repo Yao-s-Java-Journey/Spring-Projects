@@ -1,5 +1,6 @@
 package com.manager.controller;
 
+import com.manager.anno.Loggable;
 import com.manager.entity.Employee;
 import com.manager.entity.EmployeeQueryParam;
 import com.manager.entity.PageBean;
@@ -58,6 +59,7 @@ public class EmployeeController {
      * @param ids
      * @return
      */
+    @Loggable
     @DeleteMapping
     public Result delete(/* 或者 Integer[] ids */ @RequestParam List<Integer> ids) {
         employeeService.delete(ids);
@@ -76,6 +78,7 @@ public class EmployeeController {
     /**
      * 修改员工信息
      */
+    @Loggable
     @PutMapping()
     public Result update(@RequestBody Employee employee) {
         employeeService.update(employee);
