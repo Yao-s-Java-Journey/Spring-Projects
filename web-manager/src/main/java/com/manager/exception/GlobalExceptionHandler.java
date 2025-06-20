@@ -12,7 +12,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler
     // @ExceptionHandler(NullPointerException.class)
     public Result doException(Exception e) {
-        log.error("服务器发生异常：{}", e.getMessage());
-        return Result.error("服务器发生异常");
+        String msg = e.getMessage();
+        log.error("服务器发生异常：{}", msg);
+        return Result.error("服务器异常：" + msg);
     }
 }
